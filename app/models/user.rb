@@ -3,6 +3,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:omniauthable, omniauth_providers: [:twitter]
   
+  has_many :books,dependent: :destroy
+
+  attachment :profile_image
+  
   def self.from_omniauth(auth)
      user = User.where(uid: auth.uid, provider: auth.provider).first
 
