@@ -1,0 +1,15 @@
+  <%= form_for(@book) do |f| %>
+  <div class="field row">
+    <%= f.label :title,"タイトル" %>
+    <%= f.text_field :title, class: 'col-xs-12 book_title' %>
+  </div>
+
+  <div class="field row">
+    <%= f.label :description,"本文" %>
+    <%= f.text_area :description, class: 'col-xs-12 book_body'%>
+  </div>
+
+  <div class="actions row">
+    <%= f.submit "投稿する",class: 'btn btn-primary col-xs-12'%>
+  </div>
+<% end %>
