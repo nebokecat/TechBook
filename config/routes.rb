@@ -5,5 +5,9 @@ Rails.application.routes.draw do
     }
   root to:'home#index'
   resources:users,param: :user_name
-  resources:books,param: :book_id
+  resources:books,param: :book_id do
+    member do
+     resource :favorites,only: [:create,:destroy]
+    end
+  end
 end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,:omniauthable, omniauth_providers: [:twitter]
   
   has_many :books,dependent: :destroy
+  has_many :favorites,dependent: :destroy
 
   attachment :profile_image
   
