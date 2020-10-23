@@ -6,6 +6,9 @@ class User < ApplicationRecord
   has_many :books,dependent: :destroy
   has_many :favorites,dependent: :destroy
 
+  validates :name,presence: true,uniqueness: true, length: {maximum: 15, minimum: 3}
+  validates :introduction, length: {maximum: 200}
+
   attachment :profile_image
   
   def self.from_omniauth(auth)
