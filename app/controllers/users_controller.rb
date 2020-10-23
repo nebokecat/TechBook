@@ -4,6 +4,12 @@ class UsersController < ApplicationController
     
     def rank
     end
+    
+    def followers
+    end
+    
+    def followings
+    end
 
     def show
         @books = @user.books

@@ -2,6 +2,21 @@
 <%= attachment_image_tag @user, :profile_image,size: "100x100",fallback: "no_image.jpg" %>
 <%= @user.name %>
 <%= @user.introduction %>
+    フォロー中
+    <%= link_to followings_user_path(@user.name) do %>
+        <%= @user.followings.count %>人
+    <% end %>
+    
+    フォロワー
+    <%= link_to followers_user_path(@user.name) do %>
+        <%= @user.followers.count %>人
+    <% end %>
 <% if @user == current_user %>
 <%= link_to "プロフィール編集",edit_user_path %>
+<% else %>
+    <% if current_user.following?(@user) %>
+      <%= link_to "フォロー外す", relationships_path(@user.name), method: :delete, class:"btn btn-default"%>
+    <% else %>
+      <%= link_to "フォローする", relationships_path(@user.name), method: :post, class:"btn btn-primary"%>
+    <% end %>
 <% end %>
