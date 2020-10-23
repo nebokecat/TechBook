@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources:books,param: :book_id do
     member do
      resource :favorites,only: [:create,:destroy]
+     resource :book_comment,only: [:create,:destroy]
     end
   end
 end
