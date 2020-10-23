@@ -19,6 +19,7 @@ class BooksController < ApplicationController
     end
     
     def show
+        @comment = BookComment.new
     end
     
     def edit
