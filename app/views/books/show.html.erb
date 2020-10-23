@@ -1,11 +1,11 @@
 <table class='table'>
   <tr>
-    <td><%= link_to(@book.user) do %>
+    <td><%= link_to user_path(@book.user.name) do %>
       <%= attachment_image_tag(@book.user, :profile_image, size:"100x100", fallback: "no_image.jpg") %><br>
       <%= @book.user.name %>
       <% end %>
     </td>
-    <td><%= link_to @book.description, @book %></td>
+    <td><%= @book.title %></td>
     <td><%= @book.description %></td>
     <td class=<%= "table__favorite--" +@book.id.to_s %>>
       <%= render 'favorites/book',book: @book, user: current_user%>
