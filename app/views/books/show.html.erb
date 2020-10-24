@@ -7,7 +7,7 @@
     </td>
     <td><%= @book.title %></td>
     <td><%= @book.description %></td>
-    <td class=<%= "table__favorite--" +@book.id.to_s %>>
+    <td id=<%= "table__favorite--" +@book.id.to_s %>>
       <%= render 'favorites/book',book: @book, user: current_user%>
     </td>
     <td>コメント数: <%= @book.book_comments.count %></td>
@@ -17,7 +17,7 @@
     <% end %>
   </tr>
 </table>
-<div class="comment__table">
+<div id="comment__table">
       <%= render 'book_comments/table', book_comments: @book.book_comments%>
 </div>
   <%= form_with(model: [@book, @comment],url:book_comment_path,local: true) do |f|%>

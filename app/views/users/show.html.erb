@@ -10,6 +10,12 @@
     フォロワー
     <%= link_to followers_user_path(@user.name) do %>
         <%= @user.followers.count %>人
+    <% end %><br>
+    
+    
+<% @user.books.each do |book| %>
+<%= link_to book.title,book_path(book) %>
+<%= book.description %>
     <% end %>
 <% if @user == current_user %>
 <%= link_to "プロフィール編集",edit_user_path %>
