@@ -5,14 +5,12 @@ class BookCommentsController < ApplicationController
     @comment.book_id = params[:book_id]
     @comment.save
     @book = Book.find(params[:book_id])
-    redirect_to books_path
   end
 
   def destroy
     @comment = BookComment.find(params[:book_id])
     @book = @comment.book
     @comment.destroy
-    redirect_to books_path
   end
 
   private
