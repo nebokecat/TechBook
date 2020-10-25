@@ -4,22 +4,45 @@
     <title>TechBook</title>
     <%= csrf_meta_tags %>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="text-center">
     <header>
-            <nav>
-                <% if user_signed_in? %>
-                <strong><%= link_to current_user.name, user_path(current_user.name) %></strong>
-                <%= link_to 'プロフィール変更', edit_user_path(current_user.name) %>
-                <%= link_to '新規投稿', new_book_path %>
-                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-            <% else %>
-                <%= link_to 'サインアップ', new_user_registration_path %>
-                <%= link_to 'ログイン', new_user_session_path %>
-                <% end %>
+            <nav class="navbar navbar-light navbar-expand-md bg-light fixed-top">
+                  <% if user_signed_in? %>
+                    <%= link_to "TeckBook",user_path(current_user.name),class:"navbar-brand mg-" %>
+                    <span class="nav-link">ようこそ <strong><%= current_user.name %></strong> さん</span>
+                  <% else %>
+                    <%= link_to "TeckBook",root_path,class:"navbar-brand" %>
+                  <% end %>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse justify-content-end" id="navbarsExampleDefault">
+                  <ul class="navbar-nav" >
+                  <% if user_signed_in? %>
+                    <li class="nav-item">
+                      <%= link_to 'プロフィール変更', edit_user_path(current_user.name),class:"nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to '新規投稿', new_book_path,class:"nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class:"nav-link" %>
+                    </li>
+                  <% else %>
+                    <li class="nav-item">
+                      <%= link_to 'サインアップ', new_user_registration_path,class:"nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to 'ログイン', new_user_session_path,class:"nav-link" %>
+                    </li>
+                  <% end %>
+                  </ul>
+                </div>
             </nav>
         </header>
         

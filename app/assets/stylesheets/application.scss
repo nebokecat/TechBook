@@ -14,3 +14,25 @@
  *= require_self
  */
 @import "bootstrap";
+
+.field_with_errors {
+    display:contents;
+}
+
+#error_explanation {
+    display:inline-block;
+    h2{
+        border-bottom:5px solid red;
+    }
+    li{
+        list-style:none;
+    }
+}
+
+.twitter-link{
+    border-radius:5px;
+}
+
+body {
+    padding-top:56px;
+}

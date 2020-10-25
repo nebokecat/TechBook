@@ -4,13 +4,11 @@ class RelationshipsController < ApplicationController
   def create
     current_user.follow(@user)
     flash[:success] = 'ユーザーをフォローしました'
-    redirect_to request.referer
   end
 
   def destroy
     current_user.unfollow(@user)
     flash[:success] = 'ユーザーのフォローを解除しました'
-    redirect_to request.referer
   end
 
 

@@ -1,16 +1,15 @@
 
 <%= attachment_image_tag @user, :profile_image,size: "100x100",fallback: "no_image.jpg" %>
 <%= @user.name %>
-<%= @user.introduction %>
+<%= @user.introduction %><br>
     フォロー中
-    <%= link_to followings_user_path(@user.name) do %>
-        <%= @user.followings.count %>人
-    <% end %>
-    
+    <div id="following-count_<%= @user.id %>">
+        <%= link_to "#{@user.followings.count}人",followings_user_path(@user.name) %>
+    </div>
     フォロワー
-    <%= link_to followers_user_path(@user.name) do %>
-        <%= @user.followers.count %>人
-    <% end %><br>
+    <div id="follower-count_<%= @user.id %>">
+        <%= link_to "#{@user.followers.count}人",followers_user_path(@user.name) %>
+    </div>
     
     
 <% @user.books.each do |book| %>
@@ -18,11 +17,9 @@
 <%= book.description %>
     <% end %>
 <% if @user == current_user %>
-<%= link_to "プロフィール編集",edit_user_path %>
+    <%= link_to "プロフィール編集",edit_user_path %>
 <% else %>
-    <% if current_user.following?(@user) %>
-      <%= link_to "フォロー外す", relationships_path(@user.name), method: :delete, class:"btn btn-default"%>
-    <% else %>
-      <%= link_to "フォローする", relationships_path(@user.name), method: :post, class:"btn btn-primary"%>
-    <% end %>
+    <div id="follow-button_<%= @user.id %>">
+        <%= render 'relationships/follow-button',user:@user %>
+    </div>
 <% end %>
