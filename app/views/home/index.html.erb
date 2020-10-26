@@ -1,1 +1,17 @@
-<%= link_to 'Twitterでログイン','/users/auth/twitter' %>
+<div class="row">
+  <div class='col-10 offset-md-1'>
+    <h1><span class='glyphicon glyphicon-book'><strong>TechBook</strong> へようこそ!!</h1>
+          <p> TechBookはエンジニアの技術力を培う本をお互い紹介しあうサイトです</p>
+
+    <div class="btn-wrapper">
+      <div class="row">
+         <%= link_to 'Log in',new_user_session_path, class: "btn btn-info col-sm-8 offset-sm-2 mb-2" %>
+      </div>
+      <div class="row">
+        <%= link_to 'Sign Up',new_user_registration_path, class: "btn btn-success col-sm-8 offset-sm-2" %>
+      </div>
+    </div>
+            
+  </div>
+</div>
+        
