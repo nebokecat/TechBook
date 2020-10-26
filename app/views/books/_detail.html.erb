@@ -1,7 +1,7 @@
 <div class="row border-bottom">
     <div class="col-md-3"><%= book.title %></div>
     <div class="col-md-5" style="word-break: break-all;"><%= book.description %></div>
-    <div  class="col-md-2",id=<%= "table__favorite--" +book.id.to_s %>>
+    <div  class="col-md-2" id=<%= "table__favorite--" + book.id.to_s %>>
       <%= render 'favorites/book',book: book, user: current_user,count: book.favorites.count %>
     </div>
     <div  class="col-md-2">コメント数: <%= book.book_comments.count %></div>
