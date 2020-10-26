@@ -2,7 +2,7 @@ class BooksController < ApplicationController
     before_action :set_book,only: [:show,:edit,:update,:destroy]
     
     def index
-        @books = Book.all
+        @books = Book.all.includes(:user,:favorites,:book_comments).order(created_at: :desc).page(params[:page]).per(20)
     end
     
     def new
@@ -19,15 +19,13 @@ class BooksController < ApplicationController
     end
     
     def show
-        @book = Book.find(params[:book_id])
+        @comment = BookComment.new
     end
     
     def edit
-        @book = Book.find(params[:book_id])
     end
     
     def update
-        @book = Book.find(params[:id])
         if @book.update(book_params)
           redirect_to @book
         else
