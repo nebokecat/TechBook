@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to:'home#index'
   resources:users,param: :user_name do
      member do
+       get 'favorites' => 'favorites#index'
       get 'followers'
       get 'followings'
       resource :relationships, only: [:create, :destroy]

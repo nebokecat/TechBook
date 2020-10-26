@@ -25,14 +25,21 @@
                   <ul class="navbar-nav" >
                   <% if user_signed_in? %>
                     <li class="nav-item">
-                      <%= link_to 'プロフィール変更', edit_user_path(current_user.name),class:"nav-link" %>
+                      <%= link_to '新着一覧', books_path,class:"nav-link" %>
                     </li>
                     <li class="nav-item">
                       <%= link_to '新規投稿', new_book_path,class:"nav-link" %>
                     </li>
-                    <li class="nav-item">
-                      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class:"nav-link" %>
-                    </li>
+                    <li class="nav-item dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        menu
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <%= link_to "マイページ",user_path(current_user.name),class:"dropdown-item" %>
+                        <%= link_to "プロフィール変更", edit_user_path(current_user.name),class:"dropdown-item" %>
+                        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class:"dropdown-item" %>
+                      </div>
+                    </div>
                   <% else %>
                     <li class="nav-item">
                       <%= link_to 'サインアップ', new_user_registration_path,class:"nav-link" %>
@@ -46,8 +53,10 @@
             </nav>
         </header>
         
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-    <%= yield %>
+        <p class=" alert-success"><%= notice %></p>
+        <p class="alert-danger"><%= alert %></p>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

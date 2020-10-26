@@ -1,3 +1,4 @@
+require "open-uri"
 class User < ApplicationRecord
   # deviseモジュール設定
   devise :database_authenticatable, :registerable,
@@ -5,6 +6,7 @@ class User < ApplicationRecord
   
   has_many :books,dependent: :destroy
   has_many :favorites,dependent: :destroy
+  has_many :favorite_books,through: :favorites,source: :book
   has_many :book_comments,dependent: :destroy
 
   validates :name,presence: true,uniqueness: true, length: {maximum: 15, minimum: 3}
@@ -29,6 +31,7 @@ class User < ApplicationRecord
       user = User.create(
         uid:      auth.uid,
         provider: auth.provider,
+        profile_image: open(auth.info.image),
         email:    User.dummy_email(auth),
         name:     auth.info.name,
         password: Devise.friendly_token[0, 20]

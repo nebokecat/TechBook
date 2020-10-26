@@ -1,18 +1,20 @@
 class UsersController < ApplicationController
     before_action :sign_in_required
     before_action :set_user
-    
+
     def rank
     end
     
     def followers
+      @users = @user.followers.includes(:followings,:followers).page(params[:page]).per(20)
     end
     
     def followings
+      @users = @user.followings.includes(:followings,:followers).page(params[:page]).per(20)
     end
-
+    
     def show
-        @books = @user.books
+      @books = @user.books.includes(:favorites).order(created_at: :desc).page(params[:page]).per(20)
     end
     
     def edit
@@ -20,8 +22,9 @@ class UsersController < ApplicationController
     
     def update
         if @user.update(user_params)
-          redirect_to user_path(@user)
+          redirect_to user_path(@user.name)
         else
+          @user.name = params[:user_name]
           render 'edit'
         end
     end

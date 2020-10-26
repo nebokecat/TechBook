@@ -1,24 +1,24 @@
 <h2>プロフィール編集</h2>
 
-<%= form_with(model:@user,local:true) do |f| %>
+<%= form_with(model:@user,local:true,url: user_path(@user.name)) do |f| %>
   <%= render 'layouts/errors', obj: @user %>
 
-  <div class="field">
-    <%= f.label :name,"名前" %>
-    <%= f.text_field :name, class: "name" %>
+  <div class="field row">
+    <%= f.text_field :name,placeholder:"名前", class: "col-sm mb-2 form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :image,"プロフィール画像" %>
-    <%= f.attachment_field :profile_image, class: "user_image" %>
+  <div class="field row">
+    <div class="col-sm mb-2 form-control">
+      <%= f.label :image,"プロフィール画像" %>
+      <%= f.attachment_field :profile_image %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :introduction,"紹介文" %>
-    <%= f.text_area :introduction, class: "introduction" %>
+  <div class="field row">
+    <%= f.text_area :introduction,placeholder:"プロフィール文" ,class: "introduction col-sm mb-4 form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:"btn btn-primary col-sm"%>
   </div>
 <% end %>

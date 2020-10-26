@@ -1,25 +1,49 @@
-
-<%= attachment_image_tag @user, :profile_image,size: "100x100",fallback: "no_image.jpg" %>
-<%= @user.name %>
-<%= @user.introduction %><br>
-    フォロー中
-    <div id="following-count_<%= @user.id %>">
-        <%= link_to "#{@user.followings.count}人",followings_user_path(@user.name) %>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-12">
+                <%= attachment_image_tag @user, :profile_image,size: "100x100",fallback: "no_image.jpg" %>
+            </div>
+            <div class="col-12">
+                <%= @user.name %>
+            </div>
+            <div class="col-12">
+                <%= @user.introduction %>
+            </div>
+            <div class="col-lg-6" id="following-count_<%= @user.id %>">
+                <p>フォロー中</p>
+                <%= link_to "#{@user.followings.count}人",followings_user_path(@user.name) %>
+            </div>
+            <div class="col-lg-6" id="follower-count_<%= @user.id %>">
+                <p>フォロワー</p>
+                <%= link_to "#{@user.followers.count}人",followers_user_path(@user.name) %>
+            </div>
+            <div class="col-12">
+                <p>お気に入り一覧</p>
+                <%= link_to "#{@user.favorites.count}個",favorites_user_path %>
+            </div>
+            <div class="my-3 col-12">
+                <% unless @user == current_user %>
+                    <div id="follow-button_<%= @user.id %>">
+                        <%= render 'relationships/follow-button',user:@user %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
     </div>
-    フォロワー
-    <div id="follower-count_<%= @user.id %>">
-        <%= link_to "#{@user.followers.count}人",followers_user_path(@user.name) %>
+    <div class="col-sm-8">
+        <h3>投稿一覧</h3>
+        <table class='table table-hover table-inverse'>
+          <tbody>
+            <% @books.each do |book| %>
+            <tr>
+                <td><%= link_to book.title,book_path(book) %></td>
+                <td><%= book.description.truncate(20) %></td>
+                <td>お気に入り:<%= book.favorites.size %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @books %>
     </div>
-    
-    
-<% @user.books.each do |book| %>
-<%= link_to book.title,book_path(book) %>
-<%= book.description %>
-    <% end %>
-<% if @user == current_user %>
-    <%= link_to "プロフィール編集",edit_user_path %>
-<% else %>
-    <div id="follow-button_<%= @user.id %>">
-        <%= render 'relationships/follow-button',user:@user %>
-    </div>
-<% end %>
+</div>

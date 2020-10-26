@@ -1,1 +1,1 @@
-$('#<%= "table__favorite--" +@book.id.to_s %>').html("<%= j(render 'favorites/book',book: @book, user: current_user) %>");
+$('#<%= "table__favorite--" +@book.id.to_s %>').html("<%= j(render 'favorites/book',book: @book, user: current_user,count: @book.favorites.size) %>");

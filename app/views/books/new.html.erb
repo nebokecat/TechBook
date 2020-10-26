@@ -1,15 +1,15 @@
+ <h3>新規投稿</h3>
+<%= render 'layouts/errors', obj:@book %>
   <%= form_for(@book) do |f| %>
   <div class="field row">
-    <%= f.label :title,"タイトル" %>
-    <%= f.text_field :title, class: 'col-xs-12 book_title' %>
+    <%= f.text_field :title,placeholder:"タイトル", class: "col-sm mb-2 form-control"%>
   </div>
 
   <div class="field row">
-    <%= f.label :description,"本文" %>
-    <%= f.text_area :description, class: 'col-xs-12 book_body'%>
+    <%= f.text_area :description,placeholder:"本文", class: 'col-sm mb-5 form-control'%>
   </div>
 
   <div class="actions row">
-    <%= f.submit "投稿する",class: 'btn btn-primary col-xs-12'%>
+    <%= f.submit "投稿する",class: 'btn btn-primary col-sm'%>
   </div>
 <% end %>

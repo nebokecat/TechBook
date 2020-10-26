@@ -1,11 +1,12 @@
-<h2>新着一覧</h2>
+<h2>お気に入り一覧</h2>
 <table class='table table-hover table-inverse'>
   <thead>
     <tr> 
-      <th>投稿者</th>
+      <th></th>
+      <th>ユーザー名</th>
       <th>タイトル</th>
-      <th>おすすめ文</th>
-      <th colspan="3"></th>
+      <th>紹介文</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -16,14 +17,13 @@
           <%= link_to user_path(book.user.name) do %>
             <%= attachment_image_tag(book.user, :profile_image, size: "40x40", fallback: "no_image.jpg") %>
           <% end %>
-          <%= book.user.name %>
         </td>
-        <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
+        <td><%= book.user.name %></td>
+        <td><%= link_to book.title,book_path(book) %></td>
         <td><%= book.description.truncate(20) %></td>
-        <td id=<%= "table__favorite--" + book.id.to_s %>>
-          <%= render 'favorites/book', book: book, user: current_user,count: book.favorites.size %>
+        <td>
+            <%= render 'favorites/book',book: book, user: current_user,count: book.favorites.count %>
         </td>
-        <td>コメント数: <%= book.book_comments.size %></td>
       </tr>
     <% end %>
   </tbody>

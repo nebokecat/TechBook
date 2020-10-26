@@ -1,6 +1,11 @@
 class FavoritesController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_book
+    before_action :set_book,except:[:index]
+    
+  def index
+    user = User.find_by(name:params[:user_name])
+    @books = user.favorite_books.includes(:user,:favorites).page(params[:page]).per(20)
+  end
     
      # お気に入り登録
   def create

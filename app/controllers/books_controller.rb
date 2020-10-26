@@ -2,7 +2,7 @@ class BooksController < ApplicationController
     before_action :set_book,only: [:show,:edit,:update,:destroy]
     
     def index
-        @books = Book.all
+        @books = Book.all.includes(:user,:favorites,:book_comments).order(created_at: :desc).page(params[:page]).per(20)
     end
     
     def new
