@@ -21,7 +21,7 @@
         <td><%= book.user.name %></td>
         <td><%= link_to book.title,book_path(book) %></td>
         <td><%= book.description.truncate(20) %></td>
-        <td>
+        <td id=<%= "table__favorite--" + book.id.to_s %>>
             <%= render 'favorites/book',book: book, user: current_user,count: book.favorites.count %>
         </td>
       </tr>
