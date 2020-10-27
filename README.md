@@ -1,24 +1,32 @@
-# README
+# TechBook
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+"TechBook" is a site for engineers to share recommended technical books
 
-Things you may want to cover:
+# DEMO
 
-* Ruby version
+please wait...
 
-* System dependencies
+# Features
+- devise gem & twitter login
+ - if you don't want to sign up, you can use a test account
+   - name: test
+   - email: test@test
+   - password: aaaaaa (a * 6)
+- you can post,edit and delete books you like
+- favorite,comment to book,user follow, These function are implemented using ajax.
+- pagination
+- Layout with Bootstrap
+- SQL-aware code
 
-* Configuration
+# Completed form of goal
+- Book search function using AmazonAPI
+  - you can share your thoughts on it
+- tag function
+  - search by tag
+ etc...
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Author
+* Shusuke Saeki
+* job hunting students (Meiji Uni)
+* neboke.cat@gmail.com
+* twitter @sleepy_cat83
