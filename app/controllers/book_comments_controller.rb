@@ -1,5 +1,6 @@
 class BookCommentsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :sign_in_required
+
   def create
     @comment = current_user.book_comments.build(comment_params)
     @comment.book_id = params[:book_id]
