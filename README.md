@@ -9,9 +9,9 @@ please wait...
 # Features
 - devise gem & twitter login
  - if you don't want to sign up, you can use a test account
-  - name: test
-  - email: test@test
-  - password: aaaaaa (a * 6)
+   - name: test
+   - email: test@test
+   - password: aaaaaa (a * 6)
 - you can post,edit and delete books you like
 - favorite,comment to book,user follow, These function are implemented using ajax.
 - pagination
@@ -20,9 +20,9 @@ please wait...
 
 # Completed form of goal
 - Book search function using AmazonAPI
- - you can share your thoughts on it
+  - you can share your thoughts on it
 - tag function
- - search by tag
+  - search by tag
  etc...
 
 # Author
