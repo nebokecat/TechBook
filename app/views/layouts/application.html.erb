@@ -10,53 +10,12 @@
   </head>
 
   <body class="text-center">
-    <header>
-            <nav class="navbar navbar-light navbar-expand-md bg-light fixed-top">
-                  <% if user_signed_in? %>
-                    <%= link_to "TeckBook",user_path(current_user.name),class:"navbar-brand mg-" %>
-                    <span class="nav-link">ようこそ <strong><%= current_user.name %></strong> さん</span>
-                  <% else %>
-                    <%= link_to "TeckBook",root_path,class:"navbar-brand" %>
-                  <% end %>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse justify-content-end" id="navbarsExampleDefault">
-                  <ul class="navbar-nav" >
-                  <% if user_signed_in? %>
-                    <li class="nav-item">
-                      <%= link_to '新着一覧', books_path,class:"nav-link" %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to '新規投稿', new_book_path,class:"nav-link" %>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        menu
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <%= link_to "マイページ",user_path(current_user.name),class:"dropdown-item" %>
-                        <%= link_to "プロフィール変更", edit_user_path(current_user.name),class:"dropdown-item" %>
-                        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class:"dropdown-item" %>
-                      </div>
-                    </div>
-                  <% else %>
-                    <li class="nav-item">
-                      <%= link_to 'サインアップ', new_user_registration_path,class:"nav-link" %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to 'ログイン', new_user_session_path,class:"nav-link" %>
-                    </li>
-                  <% end %>
-                  </ul>
-                </div>
-            </nav>
-        </header>
-        
-        <p class=" alert-success"><%= notice %></p>
-        <p class="alert-danger"><%= alert %></p>
+    <%= render 'layouts/header' %>
     <div class="container">
+      <p class=" alert-success"><%= notice %></p>
+      <p class="alert-danger"><%= alert %></p>
       <%= yield %>
     </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
