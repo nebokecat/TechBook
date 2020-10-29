@@ -11,14 +11,16 @@
     </div>
 </div>
 <div class="col-8">
-  <%= render 'detail', book: @book %>
-  <div class="col-12" id="comment__table">
-        <%= render 'book_comments/table', book_comments: @book.book_comments%>
+  <div id="datail__table">
+    <%= render 'detail', book: @book %>
   </div>
-    <div id="error_explanation"></div>
-    <%= form_for [@book, @comment],remote: true, url: book_comment_path do |f|%>
-      <%= f.text_area :comment,placeholder: "コメント",rows:"3" %>
-      <%= f.submit "送信", class: "btn btn-primary", id: "comment__textarea" %>
-  <% end %>
-</div>
+  <div class="col-12" id="comment__table">
+    <%= render 'book_comments/table', book_comments: @book.book_comments %>
+  </div>
+  <div id="error_explanation"></div>
+    <%= form_with(model: [@book, @comment],remote: true, url: book_comment_path) do |f|%>
+      <%= f.text_area :comment,placeholder: "コメント",rows:"3",id:"book_comment" %>
+      <%= f.submit "送信", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
