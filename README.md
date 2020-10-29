@@ -34,7 +34,7 @@ and more,please wait...
 - 手元にRailsの環境がある場合
   - cloneしていただき、ターミナルで
 ```
-    bundle intall
+    bundle install --without production
     rails db:migrate
     rails db:seed
     rails s
