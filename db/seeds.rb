@@ -10,7 +10,7 @@
       email:"test@test",
       password:"aaaaaa"
     )
-  
+
   80.times do |n|
     Book.create!(
       title: "book#{n}",
@@ -18,3 +18,4 @@
       user_id: 1
     )
   end
+  

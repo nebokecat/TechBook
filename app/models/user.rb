@@ -9,8 +9,8 @@ class User < ApplicationRecord
   has_many :favorite_books,through: :favorites,source: :book
   has_many :book_comments,dependent: :destroy
 
-  validates :name,presence: true,uniqueness: true, length: {maximum: 15, minimum: 3}
-  validates :introduction, length: {maximum: 200}
+  validates :name,presence: true,uniqueness: true, length: { maximum: 15, minimum: 3 }
+  validates :introduction, length: { maximum: 200 }
 
   # フォローしている人達
   has_many :relationships
@@ -66,12 +66,8 @@ class User < ApplicationRecord
   def following?(other_user)
     self.followings.include?(other_user)
   end
-  
-  
-  private
 
-
-    def self.dummy_email(auth)
-      "#{auth.uid}-#{auth.provider}@example.com"
-    end
+  def self.dummy_email(auth)
+    "#{auth.uid}-#{auth.provider}@example.com"
+  end
 end
