@@ -12,10 +12,9 @@ class RelationshipsController < ApplicationController
     flash[:success] = 'ユーザーのフォローを解除しました'
   end
 
-
   private
-      
-      def set_user
-        @user = User.find_by(name: params[:user_name])
-      end
+
+  def set_user
+    @user = User.find_by(name: params[:user_name])
+  end
 end

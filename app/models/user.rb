@@ -2,39 +2,39 @@ require "open-uri"
 class User < ApplicationRecord
   # deviseモジュール設定
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,:omniauthable, omniauth_providers: [:twitter]
-  
-  has_many :books,dependent: :destroy
-  has_many :favorites,dependent: :destroy
-  has_many :favorite_books,through: :favorites,source: :book
-  has_many :book_comments,dependent: :destroy
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:twitter]
 
-  validates :name,presence: true,uniqueness: true, length: { maximum: 15, minimum: 3 }
+  has_many :books, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_books, through: :favorites, source: :book
+  has_many :book_comments, dependent: :destroy
+
+  validates :name, presence: true, uniqueness: true, length: { maximum: 15, minimum: 3 }
   validates :introduction, length: { maximum: 200 }
 
   # フォローしている人達
-  has_many :relationships
-  has_many :followings,through: :relationships,source: :follow
-  
+  has_many :relationships, dependent: :destroy
+  has_many :followings, through: :relationships, source: :follow
+
   # フォロワー
-  has_many :reverse_of_relationships,class_name: 'Relationship',foreign_key: 'follow_id'
-  has_many :followers, through: :reverse_of_relationships,source: :user
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: "follow_id", dependent: :destroy, inverse_of: :follow
+  has_many :followers, through: :reverse_of_relationships, source: :user
 
   attachment :profile_image
-  
-  #OAuth
-  
+
+  # OAuth
+
   def self.from_omniauth(auth)
-     user = User.where(uid: auth.uid, provider: auth.provider).first
+    user = User.find_by(uid: auth.uid, provider: auth.provider)
 
     unless user
       user = User.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        profile_image: open(auth.info.image),
-        email:    User.dummy_email(auth),
-        name:     auth.info.name,
-        password: Devise.friendly_token[0, 20]
+        uid:            auth.uid,
+        provider:       auth.provider,
+        profile_image:  URI.parse(auth.info.image).open,
+        email:          User.dummy_email(auth),
+        name:           auth.info.name,
+        password:       Devise.friendly_token[0, 20]
       )
     end
     user
@@ -49,9 +49,9 @@ class User < ApplicationRecord
       super
     end
   end
-  
-  #follow
-  
+
+  # follow
+
   def follow(other_user)
     unless self == other_user
       self.relationships.find_or_create_by(follow_id: other_user.id)
