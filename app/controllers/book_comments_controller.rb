@@ -1,5 +1,5 @@
 class BookCommentsController < ApplicationController
-    before_action :sign_in_required
+  before_action :sign_in_required
 
   def create
     @comment = current_user.book_comments.build(comment_params)
@@ -15,7 +15,8 @@ class BookCommentsController < ApplicationController
   end
 
   private
-    def comment_params
-        params.require(:book_comment).permit(:comment)
-    end
+
+  def comment_params
+    params.require(:book_comment).permit(:comment)
+  end
 end

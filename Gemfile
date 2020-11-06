@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4'
 # Use Puma as the app server
@@ -30,16 +29,22 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'sqlite3', "~> 1.3.13"
+  # デバッグ用
   gem 'byebug', platform: :mri
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
+  # ファイル変更検知
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # springのファイルシステムの変更検知方法をpollingからlistenに
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # コーディングルールチェック
+  gem 'rubocop', require: false
+  gem 'rubocop-rails'
 end
 group :production do
   gem 'pg', '0.20.0'
@@ -47,15 +52,21 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# 日本語化
 gem 'rails-i18n'
+# 認証機能
 gem 'devise'
+# deviseのnotion日本語化
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'omniauth-oauth'
 gem 'omniauth-twitter'
+# 変数を環境変数として管理
 gem 'dotenv-rails'
+# 画像管理
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+# Bootstrap
 gem 'bootstrap', '~> 4.1.1'
-gem 'jquery-rails'
+# ページネーション
 gem 'kaminari'
