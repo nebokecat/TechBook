@@ -1,4 +1,6 @@
-require "open-uri"
+# frozen_string_literal: true
+
+require 'open-uri'
 class User < ApplicationRecord
   # deviseモジュール設定
   devise :database_authenticatable, :registerable,
@@ -17,7 +19,7 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :follow
 
   # フォロワー
-  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: "follow_id", dependent: :destroy, inverse_of: :follow
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy, inverse_of: :follow
   has_many :followers, through: :reverse_of_relationships, source: :user
 
   attachment :profile_image
@@ -26,23 +28,20 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     user = User.find_by(uid: auth.uid, provider: auth.provider)
-
-    unless user
-      user = User.create(
-        uid:            auth.uid,
-        provider:       auth.provider,
-        profile_image:  URI.parse(auth.info.image).open,
-        email:          User.dummy_email(auth),
-        name:           auth.info.name,
-        password:       Devise.friendly_token[0, 20]
-      )
-    end
+    user ||= User.create(
+      uid:            auth.uid,
+      provider:       auth.provider,
+      profile_image:  URI.parse(auth.info.image).open,
+      email:          User.dummy_email(auth),
+      name:           auth.info.name,
+      password:       Devise.friendly_token[0, 20]
+    )
     user
   end
 
   def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
-      new(session["devise.user_attributes"]) do |user|
+    if session['devise.user_attributes']
+      new(session['devise.user_attributes']) do |user|
         user.attributes = params
       end
     else
@@ -53,14 +52,12 @@ class User < ApplicationRecord
   # follow
 
   def follow(other_user)
-    unless self == other_user
-      self.relationships.find_or_create_by(follow_id: other_user.id)
-    end
+    self.relationships.find_or_create_by(follow_id: other_user.id) unless self == other_user
   end
 
   def unfollow(other_user)
     relationship = self.relationships.find_by(follow_id: other_user.id)
-    relationship.destroy if relationship
+    relationship&.destroy
   end
 
   def following?(other_user)

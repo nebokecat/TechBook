@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :sign_in_required
   before_action :set_user
 
   def rank
+    # ランキング機能想定
   end
 
   def followers
@@ -18,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    # set_userのみ
   end
 
   def update

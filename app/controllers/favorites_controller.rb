@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FavoritesController < ApplicationController
   before_action :sign_in_required
   before_action :set_book, except: [:index]

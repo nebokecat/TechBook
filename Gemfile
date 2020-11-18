@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -28,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'sqlite3', "~> 1.3.13"
+  gem 'sqlite3', '~> 1.3.13'
   # デバッグ用
   gem 'byebug', platform: :mri
 end
@@ -50,8 +52,6 @@ group :production do
   gem 'pg', '0.20.0'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # 日本語化
 gem 'rails-i18n'
 # 認証機能
@@ -64,8 +64,8 @@ gem 'omniauth-twitter'
 # 変数を環境変数として管理
 gem 'dotenv-rails'
 # 画像管理
-gem "refile", require: "refile/rails", github: 'manfe/refile'
-gem "refile-mini_magick"
+gem 'refile', require: 'refile/rails', github: 'manfe/refile'
+gem 'refile-mini_magick'
 # Bootstrap
 gem 'bootstrap', '~> 4.1.1'
 # ページネーション
